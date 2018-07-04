@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -17,5 +17,87 @@
     </ul>
   </div>
 
+    <span id="span1">{{msg}}</span>
+
+
+    <div id="app1">
+      <el-button @click="visible = true">Button</el-button>
+      <el-dialog :visible.sync="visible" title="Hello world">
+        <p>Try Element</p>
+      </el-dialog>
+    </div>
+
+    <div id="app-2">
+      <span v-bind:title="message">鼠标悬停几秒钟查看此处动态绑定的提示信息！</span>
+    </div>
+
+    <div id="app-3">
+      <p v-if="seen">现在你看到我了</p>
+    </div>
+
+    <div id="app-5">
+      <p>{{ message }}</p>
+      <button v-on:click="reverseMessage">逆转消息</button>
+    </div>
+
   </body>
+  <!-- import Vue before Element -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      el: '#app1',
+      data: function() {
+        return { visible: false }
+      }
+    })
+    var vue2 = new Vue({
+      el: '#didi-navigator',
+      data: {
+        tabs: [
+          {text: '巴士'},
+          {text: '快车'},
+          {text: '专车'},
+          {text: '顺风车'},
+          {text: '出租车'},
+          {text: 'ggggg'},
+          {text: '代驾'}
+        ]
+      }
+    })
+
+    new Vue({
+      el: '#span1',
+      data: {
+        msg: 'hello span1!'
+      }
+    })
+
+    var app2 = new Vue({
+      el: '#app-2',
+      data: {
+        message: '页面加载于 ' + new Date().toLocaleString()
+      }
+    })
+
+    var app3 = new Vue({
+      el: '#app-3',
+      data: {
+        seen: true
+      }
+    })
+
+    var app5 = new Vue({
+      el: '#app-5',
+      data: {
+        message: 'Hello Vue.js!'
+      },
+      methods: {
+        reverseMessage: function () {
+          this.message = this.message.split('').reverse().join('')
+        }
+      }
+    })
+  </script>
 </html>
