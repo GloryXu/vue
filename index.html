@@ -40,6 +40,11 @@
       <button v-on:click="reverseMessage">逆转消息</button>
     </div>
 
+    <ol>
+      <!-- 创建一个 todo-item 组件的实例 -->
+      <todo-item></todo-item>
+    </ol>
+
   </body>
   <!-- import Vue before Element -->
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
@@ -98,6 +103,11 @@
           this.message = this.message.split('').reverse().join('')
         }
       }
+    })
+
+    // 定义名为 todo-item 的新组件
+    Vue.component('todo-item', {
+      template: '<li>这是个待办项</li>'
     })
   </script>
 </html>
