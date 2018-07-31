@@ -1,15 +1,17 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import App from '../App'
 
-Vue.use(Router)
+const directory = r => require.ensure([], () => r(require('../directory/directory')), 'directory')
 
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    }
-  ]
-})
+export default [
+  {
+    path: '/',
+    component: App, //顶层路由，对应index.html
+    children: [
+      {
+        path: '/',
+        component: directory,
+        name: 'directory'
+      }
+    ]
+  }
+]
