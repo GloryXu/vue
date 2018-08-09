@@ -4,6 +4,8 @@ const directory = r => require.ensure([], () => r(require('../directory/director
 
 
 const dataBind = r => require.ensure([], () => r(require('../chapter/dataBind')), 'dataBind')
+const command = r => require.ensure([], () => r(require('../chapter/command')), 'command')
+const computed = r => require.ensure([], () => r(require('../chapter/computed')), 'computed')
 
 export default [
   {
@@ -19,6 +21,16 @@ export default [
         path: '/dataBind/:license',
         component: dataBind,
         name: 'dataBind'
+      },
+      {
+        path: '/command/:license',
+        component: command,
+        name: 'command'
+      },
+      {
+        path: '/computed/:license',
+        component: computed,
+        name: 'computed'
       }
     ]
   }
