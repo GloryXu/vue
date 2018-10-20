@@ -6,6 +6,7 @@ const directory = r => require.ensure([], () => r(require('../directory/director
 const dataBind = r => require.ensure([], () => r(require('../chapter/dataBind')), 'dataBind')
 const command = r => require.ensure([], () => r(require('../chapter/command')), 'command')
 const computed = r => require.ensure([], () => r(require('../chapter/computed')), 'computed')
+const promiseAndFileUpload = r => require.ensure([], () => r(require('../other/promiseAndFileUpload')), 'computed')
 
 export default [
   {
@@ -31,6 +32,11 @@ export default [
         path: '/computed/:license',
         component: computed,
         name: 'computed'
+      },
+      {
+        path: '/promiseAndFileUpload/:license',
+        component: promiseAndFileUpload,
+        name: 'promiseAndFileUpload'
       }
     ]
   }

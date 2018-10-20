@@ -1,13 +1,19 @@
 <template>
-  <div style="text-align: center">
-    <el-table :data="tableData" style="width: 30%;font-size: large;margin-left: 35%;" stripe @row-click="handleClick">
-      <el-table-column prop="chapter" label="序号" width="180"></el-table-column>
-      <el-table-column prop="description" label="内容" width="180"></el-table-column>
-      <!--<el-table-column fixed="right" label="操作" width="100">
+  <div>
+    <el-table :data="tableData"
+              style="width: 100%;font-size: large;"
+              border
+              stripe>
+      <el-table-column align="left" prop="chapter" label="序号" minWidth="100px"></el-table-column>
+      <el-table-column align="left" prop="description" label="内容" minWidth="180px"></el-table-column>
+      <el-table-column align="left" label="操作" minWidth="100px">
         <template slot-scope="scope">
-          <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+          <el-button
+            @click="handleClick(scope.row)"
+            type="text"
+            size="small">查看</el-button>
         </template>
-      </el-table-column>-->
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -21,7 +27,7 @@
           {chapter: '1', description: '数据绑定'},
           {chapter: '2', description: '指令'},
           {chapter: '3', description: '计算属性和侦听器'},
-          {chapter: '4', description: '数据绑定'}
+          {chapter: '999', description: 'PROMISE用法与前端xlsx组件上传文件的组合使用'}
         ]
       }
     },
@@ -40,6 +46,10 @@
           }
           case '3': {
             name = 'computed';
+            break;
+          }
+          case '999': {
+            name = 'promiseAndFileUpload';
             break;
           }
         }
