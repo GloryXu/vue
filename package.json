@@ -14,9 +14,10 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "element-ui": "^2.4.4",
+    "gojs": "^1.8.32",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "element-ui": "^2.4.4",
     "xlsx": "^0.14.0"
   },
   "devDependencies": {

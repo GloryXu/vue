@@ -1,12 +1,16 @@
 <template>
   <div>
-    数据绑定
+    <div style="border: 1px solid #ddd;text-align: left">
+      GOJS前端画图初探
+    </div>
   </div>
 </template>
 
 <script>
+
   export default {
-    name: 'dataBind',
+    name: 'gojs',
+
     data() {
       return {
 
