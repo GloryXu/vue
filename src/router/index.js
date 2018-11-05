@@ -6,6 +6,10 @@ const directory = r => require.ensure([], () => r(require('../directory/director
 const dataBind = r => require.ensure([], () => r(require('../chapter/dataBind')), 'dataBind')
 const command = r => require.ensure([], () => r(require('../chapter/command')), 'command')
 const computed = r => require.ensure([], () => r(require('../chapter/computed')), 'computed')
+
+
+
+const circularStructure = r => require.ensure([], () => r(require('../note/2018_11/circularStructure')), 'circularStructure')
 const gojs = r => require.ensure([], () => r(require('../other/gojs')), 'gojs')
 const promiseAndFileUpload = r => require.ensure([], () => r(require('../other/promiseAndFileUpload')), 'promiseAndFileUpload')
 
@@ -33,6 +37,11 @@ export default [
         path: '/computed/:license',
         component: computed,
         name: 'computed'
+      },
+      {
+        path: '/circularStructure/:license',
+        component: circularStructure,
+        name: 'circularStructure'
       },
       {
         path: '/gojs/:license',
