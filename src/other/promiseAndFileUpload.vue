@@ -13,7 +13,6 @@
     </div>
     <br/><br/><br/><br/><br/><br/>
 
-
     <el-upload
       style="display: inline; margin-left: 10px;margin-right: 10px;"
       action="#"
@@ -27,94 +26,94 @@
 </template>
 
 <script>
-  import XLSX from 'xlsx';
+import XLSX from 'xlsx'
 
-  export default {
-    name: 'promiseAndFileUpload',
+export default {
+  name: 'promiseAndFileUpload',
 
-    data() {
-      return {
+  data () {
+    return {
 
-      }
+    }
+  },
+  methods: {
+    readExcel (file) { // 解析Excel
+      let _this = this
+      return new Promise(function (resolve, reject) {
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          try {
+            // 以二进制流方式读取得到整份excel表格对象
+            var data = e.target.result, workbook = XLSX.read(data, {type: 'binary'})
+          } catch (e) {
+            reject(e.message)
+          }
+
+          // 表格的表格范围，可用于判断表头是否数量是否正确
+          var fromTo = ''
+          // 遍历每张表读取
+          for (var sheet in workbook.Sheets) {
+            let sheetInfos = workbook.Sheets[sheet]
+            let locations = []// A1,B1,C1...
+            if (workbook.Sheets.hasOwnProperty(sheet)) {
+              fromTo = sheetInfos['!ref']// A1:B5
+              locations = _this.getLocationsKeys(fromTo)
+            }
+
+            for (let i = 0; i < locations.length; i++) {
+              let value = sheetInfos[locations[i]].v
+
+              if (value != i) {
+                reject(locations[i] + '\'s parameter isn\'t ' + i)
+              }
+            }
+            resolve(true)
+          }
+        }
+        reader.readAsBinaryString(file)
+      })
     },
-    methods: {
-      readExcel(file) {// 解析Excel
-        let _this = this;
-        return new Promise(function(resolve, reject){
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            try {
-              // 以二进制流方式读取得到整份excel表格对象
-              var data = e.target.result, workbook = XLSX.read(data, {type: 'binary'});
-            } catch (e) {
-              reject(e.message);
-            }
-
-            // 表格的表格范围，可用于判断表头是否数量是否正确
-            var fromTo = '';
-            // 遍历每张表读取
-            for (var sheet in workbook.Sheets) {
-              let sheetInfos = workbook.Sheets[sheet];
-              let locations = [];// A1,B1,C1...
-              if (workbook.Sheets.hasOwnProperty(sheet)) {
-                fromTo = sheetInfos['!ref'];// A1:B5
-                locations = _this.getLocationsKeys(fromTo);
-              }
-
-              for (let i = 0;i < locations.length; i++) {
-                let value = sheetInfos[locations[i]].v;
-
-                if (value != i) {
-                  reject(locations[i] + '\'s parameter isn\'t ' + i);
-                }
-              }
-              resolve(true);
-            }
-          };
-          reader.readAsBinaryString(file);
-        });
-      },
-      beforeUpload(file) {
-        let _this = this;
-        return new Promise(function(resolve, reject){
-          _this.readExcel(file).then(result => {
-            const isLt2M = file.size / 1024 / 1024 < 2;
-            if (!isLt2M) {
-              _this.$message.error('文件大小不能超过2MB!');
-            }
-            if (isLt2M && result){
-              resolve('校验成功!');
-            } else {
-              reject(false);
-            }
-          }, error => {
-            _this.$message.error(error);
-            reject(false);
-          });
-        });
-      },
-      upLoadChange(content){
-        this.$message.success('文件上传成功!');
-      },
-      getLocationsKeys(range) {// A1:B5输出 A1,B1...
-        let start = 0;
-        let end = 0;
-        if (range.indexOf(':') >= 0) {
-          start = range.split(':')[0].charAt(0);
-          end = range.split(':')[1].charAt(0);
-        } else {
-          start = range;
-          end = range;
-        }
-
-        let result = [];
-        let startCharCode = start.charCodeAt(0);
-        let endCharCode = end.charCodeAt(0);
-        for (let i = startCharCode;i <= endCharCode; i++) {
-          result.push(String.fromCharCode(i) + '1');
-        }
-        return result;
+    beforeUpload (file) {
+      let _this = this
+      return new Promise(function (resolve, reject) {
+        _this.readExcel(file).then(result => {
+          const isLt2M = file.size / 1024 / 1024 < 2
+          if (!isLt2M) {
+            _this.$message.error('文件大小不能超过2MB!')
+          }
+          if (isLt2M && result) {
+            resolve('校验成功!')
+          } else {
+            reject(false)
+          }
+        }, error => {
+          _this.$message.error(error)
+          reject(false)
+        })
+      })
+    },
+    upLoadChange (content) {
+      this.$message.success('文件上传成功!')
+    },
+    getLocationsKeys (range) { // A1:B5输出 A1,B1...
+      let start = 0
+      let end = 0
+      if (range.indexOf(':') >= 0) {
+        start = range.split(':')[0].charAt(0)
+        end = range.split(':')[1].charAt(0)
+      } else {
+        start = range
+        end = range
       }
+
+      let result = []
+      let startCharCode = start.charCodeAt(0)
+      let endCharCode = end.charCodeAt(0)
+      for (let i = startCharCode; i <= endCharCode; i++) {
+        result.push(String.fromCharCode(i) + '1')
+      }
+      return result
     }
   }
+}
 </script>

@@ -22,47 +22,47 @@
 </template>
 
 <script>
-  const CircularJSON = require('circular-json');
+const CircularJSON = require('circular-json')
 
-  export default {
-    name: 'circularStructure',
-    data() {
-      return {
-        exceptionInfo: '',
-        result: ''
+export default {
+  name: 'circularStructure',
+  data () {
+    return {
+      exceptionInfo: '',
+      result: ''
+    }
+
+  // 在组件中
+  methods: {
+    exception () {
+      this.exceptionInfo = ''
+      this.result = ''
+      var o = {hahah: 'dddd'}
+      o.o = o
+
+      try {
+        this.result = JSON.stringify(o)
+      } catch (e) {
+        console.error(e)
+        this.exceptionInfo = e.message
       }
     },
-    // 在组件中
-    methods: {
-      exception() {
-        this.exceptionInfo = '';
-        this.result = '';
-        var o = {hahah:'dddd'};
-        o.o = o;
+    normal () { // 正常执行的代码
+      this.exceptionInfo = ''
+      this.result = ''
 
-        try {
-          this.result = JSON.stringify(o)
-        }catch (e) {
-          console.error(e);
-          this.exceptionInfo = e.message;
-        }
-      },
-      normal() {// 正常执行的代码
-        this.exceptionInfo = '';
-        this.result = '';
+      var o = {hahah: 'dddd'}
+      o.o = o
 
-        var o = {hahah:'dddd'};
-        o.o = o;
-
-        try {
-          this.result = CircularJSON.stringify(o);
-        }catch (e) {
-          console.error(e);
-          this.exceptionInfo = e.message;
-        }
+      try {
+        this.result = CircularJSON.stringify(o)
+      } catch (e) {
+        console.error(e)
+        this.exceptionInfo = e.message
       }
     }
   }
+}
 </script>
 <style>
   .showResultClass {
