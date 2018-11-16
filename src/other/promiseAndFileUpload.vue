@@ -96,9 +96,27 @@ export default {
       this.$message.success('文件上传成功!')
     },
     getLocationsKeys (range) { // A1:B5输出 A1,B1...
-      let start = 0
-      let end = 0
-      if (range.indexOf(':') >= 0) {
+      let startString = range.split(':')[0];
+      let endString = range.split(':')[1];
+
+      let start = startString.substring(0, startString.length - 1);// 字符'A'
+      let end = startString.substring(0, endString.length - 1);
+
+      let total = 0;
+      for (let i = 0; i < end.length; i++) {
+        total += Math.pow(26, end.length - 1 - i) * (end.charCodeAt(i) - 'A'.charCodeAt(0) + 1);
+      }
+
+      let result = []
+      for (let index = 0;index < total;index++) {
+        result.push(this.getCharByNum(index) + '1');
+      }
+
+
+
+      // let start = 0
+      // let end = 0
+      /*if (range.indexOf(':') >= 0) {
         start = range.split(':')[0].charAt(0)
         end = range.split(':')[1].charAt(0)
       } else {
@@ -106,13 +124,26 @@ export default {
         end = range
       }
 
-      let result = []
+
       let startCharCode = start.charCodeAt(0)
       let endCharCode = end.charCodeAt(0)
       for (let i = startCharCode; i <= endCharCode; i++) {
         result.push(String.fromCharCode(i) + '1')
-      }
+      }*/
       return result
+    },
+    getCharByNum(index) {
+      let a = parseInt(index / 26);// 整除
+      let b = index % 26;// 余数
+
+      let returnChar = String.fromCharCode(b + 65);// 最后一个字符
+      while (a > 0) {
+        b = a % 26;
+        a = parseInt(a / 26);
+        // 从后生成字符，向前推进
+        returnChar = String.fromCharCode(b + 65 - 1) + returnChar;
+      }
+      return returnChar;
     }
   }
 }
