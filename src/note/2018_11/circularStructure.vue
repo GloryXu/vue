@@ -13,11 +13,9 @@
       运行结果：{{result}}
     </div>
     <br/>
-    <el-button type="primary"
-               @click="exception">异常啦</el-button>
+    <el-button type="primary" @click="exception">异常啦</el-button>
 
-    <el-button type="primary"
-               @click="normal">正常</el-button>
+    <el-button type="primary" @click="normal">正常</el-button>
   </div>
 </template>
 
@@ -31,10 +29,11 @@ export default {
       exceptionInfo: '',
       result: ''
     }
+  },
 
   // 在组件中
   methods: {
-    exception () {
+    exception (){
       this.exceptionInfo = ''
       this.result = ''
       var o = {hahah: 'dddd'}
@@ -47,7 +46,7 @@ export default {
         this.exceptionInfo = e.message
       }
     },
-    normal () { // 正常执行的代码
+    normal (){ // 正常执行的代码
       this.exceptionInfo = ''
       this.result = ''
 
