@@ -27,6 +27,7 @@ export default {
         {chapter: '1', description: '数据绑定'},
         {chapter: '2', description: '指令'},
         {chapter: '3', description: '计算属性和侦听器'},
+        {chapter: '996', description: '缩略图功能'},
         {chapter: '997', description: '\"Converting circular structure to JSON\"异常'},
         {chapter: '998', description: 'GOJS画图初探'},
         {chapter: '999', description: 'PROMISE用法与前端xlsx组件上传文件的组合使用'}
@@ -52,6 +53,10 @@ export default {
         }
         case '997': {
           name = 'circularStructure'
+          break
+        }
+        case '996': {
+          name = 'thumbnail'
           break
         }
         case '998': {

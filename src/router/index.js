@@ -9,6 +9,7 @@ const computed = r => require.ensure([], () => r(require('../chapter/computed'))
 
 
 
+const thumbnail = r => require.ensure([], () => r(require('../note/2018_12/thumbnail')), 'thumbnail')
 const circularStructure = r => require.ensure([], () => r(require('../note/2018_11/circularStructure')), 'circularStructure')
 const gojs = r => require.ensure([], () => r(require('../other/gojs')), 'gojs')
 const promiseAndFileUpload = r => require.ensure([], () => r(require('../other/promiseAndFileUpload')), 'promiseAndFileUpload')
@@ -52,6 +53,11 @@ export default [
         path: '/promiseAndFileUpload/:license',
         component: promiseAndFileUpload,
         name: 'promiseAndFileUpload'
+      },
+      {
+        path: '/thumbnail/:license',
+        component: thumbnail,
+        name: 'thumbnail'
       }
     ]
   }
