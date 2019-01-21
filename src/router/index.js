@@ -9,6 +9,7 @@ const computed = r => require.ensure([], () => r(require('../chapter/computed'))
 
 
 
+const copy = r => require.ensure([], () => r(require('../note/2019_01/copy')), 'copy')
 const thumbnail = r => require.ensure([], () => r(require('../note/2018_12/thumbnail')), 'thumbnail')
 const circularStructure = r => require.ensure([], () => r(require('../note/2018_11/circularStructure')), 'circularStructure')
 const gojs = r => require.ensure([], () => r(require('../other/gojs')), 'gojs')
@@ -58,7 +59,12 @@ export default [
         path: '/thumbnail/:license',
         component: thumbnail,
         name: 'thumbnail'
-      }
+      },
+      {
+        path: '/copy/:license',
+        component: copy,
+        name: 'copy'
+      },
     ]
   }
 ]

@@ -27,6 +27,7 @@ export default {
         {chapter: '1', description: '数据绑定'},
         {chapter: '2', description: '指令'},
         {chapter: '3', description: '计算属性和侦听器'},
+        {chapter: '995', description: '复制功能'},
         {chapter: '996', description: '缩略图功能'},
         {chapter: '997', description: '\"Converting circular structure to JSON\"异常'},
         {chapter: '998', description: 'GOJS画图初探'},
@@ -51,12 +52,16 @@ export default {
           name = 'computed'
           break
         }
-        case '997': {
-          name = 'circularStructure'
+        case '995': {
+          name = 'copy'
           break
         }
         case '996': {
           name = 'thumbnail'
+          break
+        }
+        case '997': {
+          name = 'circularStructure'
           break
         }
         case '998': {
